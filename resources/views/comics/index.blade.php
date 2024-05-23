@@ -18,7 +18,7 @@
                         </ul>
                     </div>
                     <div class="card-body">
-                        <a href="#" class="card-link">Mostra altro</a>
+                        <a href="{{ route('comics.show', ['comic' => $comic->id])}}" class="card-link">Mostra altro</a>
                     </div>
                 </div>
             </div>
