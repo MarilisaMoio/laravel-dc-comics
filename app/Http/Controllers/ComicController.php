@@ -39,15 +39,15 @@ class ComicController extends Controller
     {
         $formData = $request->all();
 
-        // Creo nuova riga nel db
         $newComic = new Comic();
-        $newComic->title = $formData['title'];
-        $newComic->description = $formData['description'];
-        $newComic->thumb = $formData['thumb'];
-        $newComic->price = $formData['price'];
-        $newComic->type = $formData['type'];
-        $newComic->series = $formData['series'];
-        $newComic->sale_date = $formData['sale_date'];
+        //$newComic->title = $formData['title'];
+        //$newComic->description = $formData['description'];
+        //$newComic->thumb = $formData['thumb'];
+        //$newComic->price = $formData['price'];
+        //$newComic->type = $formData['type'];
+        //$newComic->series = $formData['series'];
+        //$newComic->sale_date = $formData['sale_date'];
+        $newComic->fill($formData);
         $newComic->save();
 
         return redirect()->route('comics.show', ['comic' => $newComic->id]);
@@ -74,7 +74,9 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+
+        return view('comics.edit', ['comic' => $comic]);
     }
 
     /**
@@ -86,7 +88,15 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+
+        $formData = $request->all();
+
+        //* ricorda di precompilare il form
+        $comic->fill($formData);
+        $comic->save();
+
+        return redirect()->route('comics.show', ['comic' => $comic->id]);
     }
 
     /**

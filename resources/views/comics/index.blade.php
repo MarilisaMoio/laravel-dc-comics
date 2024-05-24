@@ -19,6 +19,7 @@
                     </div>
                     <div class="card-body">
                         <a href="{{ route('comics.show', ['comic' => $comic->id])}}" class="card-link">Mostra altro</a>
+                        <a href="{{ route('comics.edit', ['comic' => $comic->id])}}" class="card-link">Modifica</a>
                     </div>
                 </div>
             </div>
