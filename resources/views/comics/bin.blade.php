@@ -6,6 +6,12 @@
 
 @section('content')
     <div class="row justify-content-center">
+        <form action="{{ route('comics.emptyAllBin') }}" method="POST">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger" id="deleteAllBtn">Elimina Tutto</button>
+        </form>
         @foreach ($delComics as $comic)
             <div class="col-auto">
                 <div class="card" style="width: 18rem;">

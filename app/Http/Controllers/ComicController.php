@@ -125,7 +125,7 @@ class ComicController extends Controller
     }
 
     /**
-     * Completely delete the item.
+     * Completely delete the item in bin.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -135,5 +135,18 @@ class ComicController extends Controller
         $delComic = Comic::withTrashed()->findOrFail($comic)->forceDelete();
 
         return redirect()->route('comics.bin');
+    }
+
+    /**
+     * Completely delete all the items in bin.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function emptyAllBin()
+    {
+        $delComics = Comic::onlyTrashed()->forceDelete();
+
+        return redirect()->route('comics.index');
     }
 }
