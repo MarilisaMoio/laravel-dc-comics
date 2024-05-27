@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Modifica Fumetto
+@endsection
+
 @section('content')
 <section>
     <div class="container">

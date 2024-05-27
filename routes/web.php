@@ -18,3 +18,7 @@ use App\Http\Controllers\ComicController;
 Route::get('/', [PageController::class, 'index'])->name('home');
 
 Route::resource('comics', ComicController::class);
+
+Route::get('bin', [ComicController::class, 'bin'])->name('comics.bin');
+
+Route::delete('emptyBin/{comic}', [ComicController::class, 'emptyBin'])->name('comics.emptyBin');

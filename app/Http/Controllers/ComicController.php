@@ -108,6 +108,32 @@ class ComicController extends Controller
     {
         $comic = Comic::findOrFail($id)->delete();
 
-        return redirect()->route('comics.index');
+        return redirect()->route('comics.bin');
+    }
+
+    /**
+     * Shows the softly-removed items.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function bin()
+    {
+        $delComics = Comic::onlyTrashed()->get();
+
+        return view('comics.bin', compact('delComics'));
+    }
+
+    /**
+     * Completely delete the item.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function emptyBin($comic)
+    {
+        $delComic = Comic::withTrashed()->findOrFail($comic)->forceDelete();
+
+        return redirect()->route('comics.bin');
     }
 }

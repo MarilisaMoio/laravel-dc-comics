@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page-title')
+    {{ $comic->title }}
+@endsection
+
 @section('content')
     <div class="row justify-content-center">
         <div class="col-auto">

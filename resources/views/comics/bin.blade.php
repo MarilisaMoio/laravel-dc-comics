@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('page-title')
-    Fumetti
+    Cestino
 @endsection
 
 @section('content')
     <div class="row">
-        @foreach ($comics as $comic)
+        @foreach ($delComics as $comic)
             <div class="col">
                 <div class="card" style="width: 16rem;">
                     <img src="https://picsum.photos/300/200" class="card-img-top" alt="{{ $comic->title }}">
@@ -26,11 +26,11 @@
                         <a href="{{ route('comics.edit', ['comic' => $comic->id])}}" class="card-link">Modifica</a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('comics.destroy', ['comic' => $comic->id]) }}" method="POST">
+                        <form action="{{ route('comics.emptyBin', ['comic' => $comic->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger">Elimina</button>
+                            <button type="submit" class="btn btn-danger">Elimina Definitivamente</button>
                         </form>
                     </div>
                 </div>
