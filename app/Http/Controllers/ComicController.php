@@ -91,7 +91,6 @@ class ComicController extends Controller
         $comic = Comic::findOrFail($id);
 
         $formData = $request->all();
-
         //* ricorda di precompilare il form
         $comic->fill($formData);
         $comic->save();
@@ -107,6 +106,8 @@ class ComicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comic = Comic::findOrFail($id)->delete();
+
+        return redirect()->route('comics.index');
     }
 }
