@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="row justify-content-center">
         @foreach ($comics as $comic)
-            <div class="col">
-                <div class="card" style="width: 16rem;">
+            <div class="col-auto">
+                <div class="card" style="width: 18rem;">
                     <img src="https://picsum.photos/300/200" class="card-img-top" alt="{{ $comic->title }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $comic->title }}</h5>

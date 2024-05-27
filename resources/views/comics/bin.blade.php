@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="row justify-content-center">
         @foreach ($delComics as $comic)
-            <div class="col">
-                <div class="card" style="width: 16rem;">
+            <div class="col-auto">
+                <div class="card" style="width: 18rem;">
                     <img src="https://picsum.photos/300/200" class="card-img-top" alt="{{ $comic->title }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $comic->title }}</h5>
@@ -22,20 +22,17 @@
                         </ul>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('comics.show', ['comic' => $comic->id])}}" class="card-link">Mostra altro</a>
-                        <a href="{{ route('comics.edit', ['comic' => $comic->id])}}" class="card-link">Modifica</a>
-                    </div>
-                    <div class="card-body">
                         <form action="{{ route('comics.emptyBin', ['comic' => $comic->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger">Elimina Definitivamente</button>
+                            <button type="submit" class="btn btn-danger js-delete" data-comic-name="{{ $comic->title }}">Elimina Definitivamente</button>
                         </form>
                     </div>
                 </div>
             </div>
         @endforeach
+        @include('modals.bin')
     </div>
 
 @endsection

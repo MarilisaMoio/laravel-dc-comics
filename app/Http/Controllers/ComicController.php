@@ -108,7 +108,7 @@ class ComicController extends Controller
     {
         $comic = Comic::findOrFail($id)->delete();
 
-        return redirect()->route('comics.bin');
+        return redirect()->route('comics.index');
     }
 
     /**
