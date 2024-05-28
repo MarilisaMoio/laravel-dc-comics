@@ -169,16 +169,16 @@ class ComicController extends Controller
         ];
 
         $messages = [
-            'required' => 'Il campo ":attribute" è vuoto, ma è necessario compilarlo',
-            'min' => 'Il campo ":attribute" necessita di almeno :min caratteri',
+            'required' => 'Il campo ":attribute" è vuoto, ma è necessario compilarlo.',
+            'min' => 'Il campo ":attribute" necessita di almeno :min caratteri.',
             'max' => [
-                'numeric' => 'Il campo ":attribute" accetta un prezzo massimo di :max.',
-                'string' => 'Il campo ":attribute" accetta un massimo di :max caratteri',
+                'numeric' => 'Il campo ":attribute" accetta un valore massimo di :max.',
+                'string' => 'Il campo ":attribute" accetta un massimo di :max caratteri.',
             ],
-            'ends_with' => 'Nel campo ":attribute" manca l\'estensione finale o non coincide con le seguenti: :values',
-            'numeric' => 'Il campo ":attribute" accetta solo valori numerici',
-            'decimal' => 'Il campo ":attribute" necessita di due valori dopo il punto, o è stata inserita una virgola al posto del punto',
-            'date' => 'Il campo ":attribute" non è una data valida',
+            'ends_with' => 'Nel campo ":attribute" manca l\'estensione finale o essa non coincide con le seguenti: :values.',
+            'numeric' => 'Il campo ":attribute" accetta solo valori numerici.',
+            'decimal' => 'Il campo ":attribute" necessita di due valori dopo il punto, o è stata inserita una virgola al posto del punto.',
+            'date' => 'Il campo ":attribute" non è una data valida.',
         ];
 
         $validator = Validator::make($input, $rules, $messages)->validate();
