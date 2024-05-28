@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comic;
+use Illuminate\Support\Facades\Validator;
 
 class ComicController extends Controller
 {
@@ -37,16 +38,8 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $formData = $request->validate([
-            'title' => 'required|min:2|max:250',
-            'description' => 'required|min:10|max:2000',
-            'thumb' => 'required|min:4|ends_with:.png,.jpg',
-            'price' => 'required|decimal:2|numeric|max:999999.99',
-            'type' => 'required|min:2|max:30',
-            'series' => 'required|min:2|max:30',
-            'sale_date' => 'required|date',
-
-        ]);
+        $formData = $request->all();
+        $this->validator($formData);
 
         $newComic = new Comic();
         //$newComic->title = $formData['title'];
@@ -123,7 +116,6 @@ class ComicController extends Controller
     /**
      * Shows the softly-removed items.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function bin()
@@ -136,7 +128,7 @@ class ComicController extends Controller
     /**
      * Completely delete the item in bin.
      *
-     * @param  int  $id
+     * @param  int  $comic
      * @return \Illuminate\Http\Response
      */
     public function emptyBin($comic)
@@ -149,7 +141,6 @@ class ComicController extends Controller
     /**
      * Completely delete all the items in bin.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function emptyAllBin()
@@ -157,5 +148,41 @@ class ComicController extends Controller
         $delComics = Comic::onlyTrashed()->forceDelete();
 
         return redirect()->route('comics.index');
+    }
+
+    /**
+     * Completely delete all the items in bin.
+     *
+     * @param  $input
+     * @return \Illuminate\Http\Response
+     */
+    private function validator($input){
+
+        $rules = [
+            'title' => 'required|min:2|max:250',
+            'description' => 'required|min:10|max:2000',
+            'thumb' => 'required|min:4|ends_with:.png,.jpg',
+            'price' => 'required|decimal:2|numeric|max:999999.99',
+            'type' => 'required|min:2|max:30',
+            'series' => 'required|min:2|max:30',
+            'sale_date' => 'required|date',
+        ];
+
+        $messages = [
+            'required' => 'Il campo ":attribute" è vuoto, ma è necessario compilarlo',
+            'min' => 'Il campo ":attribute" necessita di almeno :min caratteri',
+            'max' => [
+                'numeric' => 'Il campo ":attribute" accetta un prezzo massimo di :max.',
+                'string' => 'Il campo ":attribute" accetta un massimo di :max caratteri',
+            ],
+            'ends_with' => 'Nel campo ":attribute" manca l\'estensione finale o non coincide con le seguenti: :values',
+            'numeric' => 'Il campo ":attribute" accetta solo valori numerici',
+            'decimal' => 'Il campo ":attribute" necessita di due valori dopo il punto, o è stata inserita una virgola al posto del punto',
+            'date' => 'Il campo ":attribute" non è una data valida',
+        ];
+
+        $validator = Validator::make($input, $rules, $messages)->validate();
+
+        return $validator;
     }
 }

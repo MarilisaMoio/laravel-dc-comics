@@ -179,6 +179,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'titolo',
+        'description' => 'descrizione',
+        'thumb' => 'immagine',
+        'price' => 'prezzo',
+        'type' => 'tipo',
+        'series' => 'serie',
+        'sale_date' => 'data',
+    ],
 
 ];
