@@ -93,6 +93,8 @@ class ComicController extends Controller
         $comic = Comic::findOrFail($id);
 
         $formData = $request->all();
+        $this->validator($formData);
+
         //* ricorda di precompilare il form
         $comic->fill($formData);
         $comic->save();
