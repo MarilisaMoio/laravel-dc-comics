@@ -7,6 +7,15 @@
 @section('content')
 <section>
     <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('comics.store') }}" method="POST">
             @csrf
             <div class="mb-3">
@@ -23,7 +32,7 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input type="text" class="form-control" id="price" name="price" pattern="^[0-9]+\.[0-9][0-9]$">
+                <input type="text" class="form-control" id="price" name="price" {{--pattern="^[0-9]+\.[0-9][0-9]$"--}}>
             </div>
             <div class="mb-3">
                 <label for="series" class="form-label">Serie</label>
